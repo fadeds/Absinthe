@@ -3,14 +3,14 @@
 ============Quantumultx===============
 [task_local]
 #店铺签到
-15 2,14 * * * https://raw.githubusercontent.com/555555/faker2/main/jd_shop_sign.js, tag=店铺签到, enabled=true
+15 2,14 * * * https://raw.githubusercontent.com/444444/KR/main/jd_shop_sign.js, tag=店铺签到, enabled=true
 ===========Loon============
 [Script]
-cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/555555/faker2/main/jd_shop_sign.js,tag=店铺签到
+cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/444444/KR/main/jd_shop_sign.js,tag=店铺签到
 ============Surge=============
-店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/555555/faker2/main/jd_shop_sign.js
+店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/444444/KR/main/jd_shop_sign.js
 ===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/555555/faker2/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/444444/KR/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
 */
 const $ = new Env('店铺签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -25,26 +25,27 @@ let vender=''
 let num=0
 let shopname=''
 const token = [
-  "325A8EF67EB44F69C4D2A7DE4160E391",
-  "065F571B5F4A0ADC8B8EC592EEB59F93",
-  "64B906CD54B5D49DCA0E57CF1D53F0FB",
-  "3B27B2B9E70249C339D66F27B7E133F0",
-  "342934FF29611CB62EF78EB90CB0AB29",
-  "C5FD1482A207F2CC65570F8FBC492C9A",
-  "7BDE362C7EC7AD46016A58A0782254C5",
-  "1C963AA3BBBD0396784BD0CA527BCDF8",
-  "C5FD1482A207F2CC65570F8FBC492C9A",
-  "5CF1A3455369BDB3D1153D9FC974CAFA",
-  "E29627AF30D59CF7FE7B01C63BD9A975",
-  "3C4C874B25439D70DB4176CEF5785B98",
-  "22E454E7DA34CBA96DFAB150C2882193",
-  "342934FF29611CB62EF78EB90CB0AB29",
-  "9AC30B59DD4E97D88E20236BBB41DBF9",
-	"3B864BF96848A44E170A26D2791E0AE3",
-	"CAA0FA07FE5FE40329504208C891CF06",
-	"771853736DBD25D6DCDC295E6A5EAB16",
-	"4EC217E55E7DC12F3FB455666A4CA414",
-	"46D8CB32794AB8EA1F42E83360918961"
+  "7B5E686A0CAF1C144620A3FFE04AFF1E",
+  "2C6ED83F0F2FF8F456624EF6D72D5597",
+  "3949F55A02AA8A345409AFD9821C861F",
+  "FBBDFE44FCD20A18A7D736DC3F640BCA",
+  "A92269DC92DDD73CC5EB38B3BACF51E3",
+  "52B71EA2E4961677AF31D4D2085974EB",
+	"1DD46671387EAC6FDC14B753E01D5E30",
+	"B143BEF2AEC6C242A4E514334056A599",
+	"662E62C629FB6B20CED938E41A0DC026",
+	"F573A078062F9F18BFCC39080864D7F5",
+  "ED26E464FC19DF617081F86F860AFA31",
+	"2E0617200F04BF484B2945B7D855345D",
+	"A44D1CA090231A92D24F0B1E5B38BD5A",
+	"67D2D5824D043A5C2EA9C53B900B932C",
+	"E5DA4749F7A04D36FBC4AFCC2D26DD7E",
+	"833CE1B5158A097598C07D4B2B5B314E",
+	"37D0FAA99892A9E613A1B46E5A55973B",
+	"D35923E942C11178C38BD29E783695B8",
+	"9958AB926F4070AF8E14B236DD3CB2C0",
+	"DB872465EDEB653BB501819F9B9DD326",
+	"BC28601FD2C5B9A5D50038825C842358"
 ]
 
 if ($.isNode()) {
@@ -75,7 +76,7 @@ if ($.isNode()) {
       $.isLogin = true;
       $.nickName = '';
       message = '';
-      await TotalBean();
+      //await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
