@@ -40,8 +40,12 @@ if ($.isNode()) {
             }
             continue
         }
-        await main();
-        //if (i == 0 && $.flag) return;
+        try {
+            await main();
+        }catch (e) {
+            console.log(`好像账号黑号~~~`);
+        }
+        if ($.flag) return;
     }
 
 })().catch((e) => { $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '') }).finally(() => { $.done(); })
@@ -53,6 +57,10 @@ async function main() {
     if($.bizCode == 'MP001'){
         console.log(`本期活动结束，等待下期。。。`);
         $.flag = true
+        return;
+    }
+    if (JSON.stringify($.activityInfo) === '{}') {
+        console.log(`获取活动详情失败`);
         return;
     }
     console.log(`获取活动详情成功`);
@@ -113,6 +121,10 @@ async function doTask() {
                 }
             }
 
+        } else if($.oneTask.assignmentType === 7) {
+            let subInfo = $.oneTask.ext.brandMemberList || '';
+            console.log(`任务：${$.oneTask.assignmentName},不入会尝试领取`);
+            await takeRequest('superBrandDoTask', { "source": "star_gift", "activityId": $.activityId, "encryptProjectId": $.encryptProjectId, "encryptAssignmentId": $.oneTask.encryptAssignmentId, "assignmentType": $.oneTask.assignmentType, "itemId": subInfo[0].itemId, "actionType": 0 });
         }
     }
 }
@@ -183,10 +195,10 @@ function dealReturn(type, data) {
                 $.runFlag = false;
                 console.log(`抽奖次数已用完`);
             } else if (data.code === '0' && data.data.bizCode == 'TK000') {
-                if (data.data && data.data.result && data.data.result.rewardComponent && data.data.result.rewardComponent.beanList) {
-                    if (data.data.result.rewardComponent.beanList.length > 0) {
-                        console.log(`获得豆子：${data.data.result.rewardComponent.beanList[0].quantity}`)
-                    }
+                if (data.data?.result?.rewardComponent?.beanList) {
+                    console.log(`获得豆子：${data.data.result.rewardComponent.beanList[0].quantity}`);
+                } else{
+                    console.log(data.data?.result);
                 }
             } else {
                 $.runFlag = false;
